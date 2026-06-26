@@ -5,7 +5,7 @@
 
 create table if not exists public.products (
   id uuid primary key default gen_random_uuid(),
-  category text not null check (category in ('Soap', 'Shampoo', 'Face Wash', 'Body Scrub')),
+  category text not null check (category in ('Soap', 'Shampoo', 'Face Wash', 'Face Cream', 'Face Serum')),
   name text not null,
   price numeric(10, 2) not null check (price >= 0),
   description text,

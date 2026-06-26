@@ -20,7 +20,13 @@ import CollectionsOutlinedIcon from '@mui/icons-material/CollectionsOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import { supabase, PRODUCTS_TABLE, PRODUCT_IMAGES_BUCKET } from '../supabaseClient';
 
-const DEFAULT_CATEGORY_OPTIONS = ['Face Cream', 'Face Wash', 'Serum', 'Shampoo', 'Soap'];
+const DEFAULT_CATEGORY_OPTIONS = [
+  'Face Cream',
+  'Face Wash',
+  'Face Serum',
+  'Shampoo',
+  'Soap'
+];
 
 const EMPTY_FORM = {
   category: '',
@@ -92,11 +98,8 @@ export default function ProductForm({ onProductAdded }) {
         ? [...new Set(data.map((row) => row.category).filter(Boolean))]
         : [];
 
-      if (categories.length > 0) {
-        setCategoryOptions(categories);
-      } else {
-        setCategoryOptions(DEFAULT_CATEGORY_OPTIONS);
-      }
+      const mergedCategories = [...new Set([...DEFAULT_CATEGORY_OPTIONS, ...categories])].sort();
+      setCategoryOptions(mergedCategories);
     } catch (err) {
       setCategoryError(err.message);
       setCategoryOptions(DEFAULT_CATEGORY_OPTIONS);
